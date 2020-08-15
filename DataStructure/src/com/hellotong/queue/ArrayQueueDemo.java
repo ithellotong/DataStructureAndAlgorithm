@@ -5,6 +5,11 @@ import java.util.Scanner;
 /**
  * 使用数组模拟队列案例
  * 
+ * 存在的问题：取出数据后的数组空间没法重复利用，数组使用一次就不能在使用了，
+ * 此队列为一次性队列。
+ * 
+ * 解决方法：将队列做成环形队列，见 CircleArrayQueueDemo.java
+ * 
  * @author hellotong
  * @date 2020-08-15 9:05
  */
@@ -136,7 +141,7 @@ class ArrayQueue {
 
     /**
      * 获取队列数据（出队列）
-     * @return
+     * @return 队头元素
      */
     public int getQueue() {
         // 判断队列是否为空
@@ -149,7 +154,7 @@ class ArrayQueue {
     }
 
     /**
-     * 遍历队列
+     * 遍历队列方式 1
      */
     public void showQueue() {
         // 判断队列是否为空
@@ -163,8 +168,24 @@ class ArrayQueue {
     }
 
     /**
+     * 遍历队列方式 2
+     */
+    public void showQueue2() {
+        // 判断队列是否为空
+        if (isEmpty()) {
+            throw new RuntimeException("队列为空，无法遍历队列");
+        }
+
+        int i = 1;
+        while ((i + front) != rear + 1) {
+            System.out.printf("arr[%d] = %d\n", i + front, arr[i + front]);
+            i++;
+        }
+    }
+
+    /**
      * 显示队头数据，不是出队列
-     * @return
+     * @return 队头元素
      */
     public int headQueue() {
         // 判断队列是否为空
