@@ -263,7 +263,7 @@ public class SingleLinkedListDemo {
 }
 
 /**
- * 定义 SingleLinkedList，管理英雄
+ * 定义单向链表 SingleLinkedList，管理英雄
  */
 class SingleLinkedList {
 
@@ -474,7 +474,7 @@ class HeroNode {
     
     // 指针域
     /**
-     * 
+     * 指向下一个节点
      */
     public HeroNode next;
 
