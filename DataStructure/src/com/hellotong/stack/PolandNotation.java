@@ -7,7 +7,7 @@ import java.util.Stack;
 /**
  * 逆波兰计算器
  * 传入一个逆波兰表达式（后缀表达式）计算结果
- * 
+ *
  * @author hellotong
  * @date 2020-08-18 20:10
  */
@@ -31,6 +31,7 @@ public class PolandNotation {
      * 从左至右扫描表达式,遇到数字时,将数字压入堆栈,遇到运算符时,弹出栈顶的两个
      * 数,用运算符对它们做相应的计算(次顶元素和栈顶元素) ,并将结果入栈;重复上
      * 述过程直到表达式最右端,最后运算得出的值即为表达式的结果
+     *
      * @param list 存放的是逆波兰表达式的每个字符（字符串）
      * @return 运算结果
      */
@@ -44,7 +45,7 @@ public class PolandNotation {
             if (s.matches("\\d+")) {
                 stack.push(Integer.parseInt(s));
             } else {
-            // 遇到运算符时,弹出栈顶的两个数,用运算符对它们做相应的计算(次顶元素和栈顶元素) ,并将结果入栈
+                // 遇到运算符时,弹出栈顶的两个数,用运算符对它们做相应的计算(次顶元素和栈顶元素) ,并将结果入栈
                 int num1 = stack.pop();
                 int num2 = stack.pop();
                 if (s.equals("+")) {
@@ -58,16 +59,17 @@ public class PolandNotation {
                 } else {
                     throw new RuntimeException("运算符有误");
                 }
-                
+
                 stack.push(res);
             }
         }
-        
+
         return res;
     }
 
     /**
      * 将一个逆波兰表达式，依次将数据和运算符放入到 ArrayList 中
+     *
      * @param suffixExpression 逆波兰表达式
      * @return 由逆波兰表达式的每个字符（字符串）构成的 List
      */
