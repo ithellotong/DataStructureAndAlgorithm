@@ -1,12 +1,15 @@
 package com.hellotong.sort;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 
 /**
  * 选择排序
  * 时间复杂度：O(n^2)
+ * 选择排序（select sorting）也是一种简单的排序方法。它的基本思想是：第一次从 arr[0]~arr[n-1]中选取最小值，
+ * 与 arr[0]交换，第二次从 arr[1]~arr[n-1]中选取最小值，与 arr[1]交换，第三次从 arr[2]~arr[n-1]中选取最小值，与 arr[2]
+ * 交换，…，第 i 次从 arr[i-1]~arr[n-1]中选取最小值，与 arr[i-1]交换，…, 第 n-1 次从 arr[n-2]~arr[n-1]中选取最小值，
+ * 与 arr[n-2]交换，总共通过 n-1 次，得到一个按排序码从小到大排列的有序序列。
  * 
  * @author hellotong
  * @date 2020-08-22 9:51
