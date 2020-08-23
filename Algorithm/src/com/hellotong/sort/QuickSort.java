@@ -35,14 +35,18 @@ public class QuickSort {
             // 枢轴值
             int pivot = arr[low];
             while (low < high) {
+                // 将比 pivot 小的数放到左边
                 while (low < high && arr[high] >= pivot) {
                     high--;
                 }
+                // 使用右边的数字替换左边的数
                 arr[low] = arr[high];
 
+                // 将比 pivot 大的数放到右边
                 while (low < high && arr[low] <= pivot) {
                     low++;
                 }
+                // 使用左边的数字替换右边的数
                 arr[high] = arr[low];
             }
 
