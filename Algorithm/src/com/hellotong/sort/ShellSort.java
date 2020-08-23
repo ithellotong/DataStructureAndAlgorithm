@@ -5,6 +5,9 @@ import java.util.Date;
 
 /**
  * 希尔排序
+ * 时间复杂度：O(nlogn)
+ * 希尔排序法基本思想：希尔排序是把记录按下标的一定增量分组，对每组使用直接插入排序算法排序；随着增量逐渐减少，每组包含
+ * 的关键词越来越多，当增量减至 1 时，整个文件恰被分成一组，算法便终止.
  * 
  * @author hellotong
  * @date 2020-08-22 12:45
@@ -19,12 +22,14 @@ public class ShellSort {
         }
         // 获取排序前的时间
         Date date = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
         String dateStr = simpleDateFormat.format(date);
         System.out.println("排序前时间：" + dateStr);
 
-        shellSort(arr);
-        // shellSort2(arr);
+        // 花费不到 50ms 左右
+        // shellSort(arr);
+        // 花费不到 65ms 左右
+        shellSort2(arr);
 
         Date date2 = new Date();
         String dateStr2 = simpleDateFormat.format(date2);
@@ -78,8 +83,8 @@ public class ShellSort {
                 // 如果 arr[insertIndex] >= arr[insertIndex - gap] 就不移动，不进入 while
                 if (arr[insertIndex] < arr[insertIndex - gap]) {
                     // 寻找待插入元素的位置
-                    while (insertIndex - gap >= 0 && arr[insertIndex] < arr[insertIndex - gap]) {
-                        arr[insertIndex - gap] = arr[insertIndex];
+                    while (insertIndex - gap >= 0 && insertVal < arr[insertIndex - gap]) {
+                        arr[insertIndex] = arr[insertIndex - gap];
                         insertIndex -= gap;
                     }
                     
