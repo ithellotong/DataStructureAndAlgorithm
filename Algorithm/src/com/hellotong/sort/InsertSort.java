@@ -16,7 +16,7 @@ import java.util.Date;
 public class InsertSort {
     public static void main(String[] args) {
         // int[] arr = {101, 34, 119, 1};
-        // 生成 8w 个数据，测试冒泡排序所花费的时间
+        // 生成 8w 个数据，测试插入排序所花费的时间
         int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             arr[i] = (int) (Math.random() * 800000);
