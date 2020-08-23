@@ -1,6 +1,8 @@
 package com.hellotong.sort;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  * 快速排序
@@ -15,9 +17,25 @@ import java.util.Arrays;
 public class QuickSort {
     public static void main(String[] args) {
         // int[] arr = {-9, 78, 0, 23, -567, 70};
-        int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
+        // int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
+        int[] arr = new int[80000];
+        for (int i = 0; i < 80000; i++) {
+            arr[i] = (int) (Math.random() * 800000);
+        }
+        // 获取排序前的时间
+        Date date = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS");
+        String dateStr = simpleDateFormat.format(date);
+        System.out.println("排序前时间：" + dateStr);
+
         quickSort2(arr, 0, arr.length - 1);
-        System.out.println(Arrays.toString(arr));
+
+        Date date2 = new Date();
+        String dateStr2 = simpleDateFormat.format(date2);
+        System.out.println("排序后时间：" + dateStr2);
+
+        // System.out.println(Arrays.toString(arr));
+        // 花费 50ms 左右
     }
 
     /**
