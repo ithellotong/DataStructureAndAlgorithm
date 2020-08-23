@@ -15,7 +15,7 @@ import java.util.Date;
 public class ShellSort {
     public static void main(String[] args) {
         // int[] arr = {8, 9, 1, 7, 2, 3, 5, 4, 6, 0};
-        // 生成 8w 个数据，测试冒泡排序所花费的时间
+        // 生成 8w 个数据，测试希尔排序所花费的时间
         int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             arr[i] = (int) (Math.random() * 800000);
@@ -34,8 +34,6 @@ public class ShellSort {
         Date date2 = new Date();
         String dateStr2 = simpleDateFormat.format(date2);
         System.out.println("排序后时间：" + dateStr2);
-
-        // 花费不到 1s 左右
     }
 
     /**
