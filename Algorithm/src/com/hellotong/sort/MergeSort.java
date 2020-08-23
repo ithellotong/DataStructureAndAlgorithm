@@ -16,7 +16,8 @@ import java.util.Date;
  */
 public class MergeSort {
     public static void main(String[] args) {
-        // int[] arr = {8, 4, 5, 7, 1, 3, 6, 2, 0};
+        // int[] arr = {8, 4, 5, 7, 1, 3, 6, 2, 0}; // 9 个数字 需要 merge 9 - 1 次
+        // 80000 个数字 需要 merge 80000 - 1 次
         int[] arr = new int[80000];
         int[] temp = new int[arr.length];
         
@@ -110,6 +111,7 @@ public class MergeSort {
         // temp 数组索引重置
         t = 0;
         int tempLeft = left;
+        // System.out.println("tempLeft = " + tempLeft + " right = " + right);
         while (tempLeft <= right) {
             arr[tempLeft] = temp[t];
             tempLeft += 1;
