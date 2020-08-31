@@ -1,15 +1,31 @@
 package com.hellotong.huffmancode;
 
+import java.io.*;
 import java.util.*;
 
 /**
- * 赫夫曼编码、字符串的压缩和解压
+ * 赫夫曼编码、字符串的压缩和解压、文件的压缩和解压
  * 
  * @author hellotong
  * @date 2020-08-30 11:55
  */
 public class HuffmanCode {
     public static void main(String[] args) {
+        // 压缩文件
+        /*String srcFile = "d://src.png";
+        String dstFile = "d://dst.zip";
+        zipFile(srcFile, dstFile);
+        System.out.println("压缩成功");*/
+        
+        // 解压文件
+        String srcFile = "d://dst.zip";
+        String dstFile = "d://src2.png";
+        unzipFile(srcFile, dstFile);
+        System.out.println("解压成功");
+        
+        /* 
+        压缩字符串
+         
         // 要压缩的内容
         String content = "i like like like java do you like a java";
         // 字符串转字节数组
@@ -45,6 +61,94 @@ public class HuffmanCode {
         byte[] zip = zip(contentBytes, huffmanCodes);
         System.out.println(Arrays.toString(zip));
         */
+    }
+
+    /**
+     * 解压文件
+     * 
+     * @param srcFile 要解压文件的全路径
+     * @param dstFile 解压后的文件存放路径
+     */
+    public static void unzipFile(String srcFile, String dstFile) {
+        // 创建输入流
+        InputStream is = null;
+        // 创建对象输入流
+        ObjectInputStream ois = null;
+        // 创建输出流
+        OutputStream os = null;
+        
+        try {
+            // 初始化文件输入流
+            is = new FileInputStream(srcFile);
+            // 初始化对象输入流与 is 关联
+            ois = new ObjectInputStream(is);
+            // 读取赫夫曼编码压缩后的字节数组
+            byte[] huffmanBytes = (byte[]) ois.readObject();
+            // 读取赫夫曼编码
+            Map<Byte, String> huffmanCodes = (Map<Byte, String>) ois.readObject();
+            // 解码得到压缩前文件的字节数组
+            byte[] srcBytes = decode(huffmanCodes, huffmanBytes);
+            // 初始化文件输出流
+            os = new FileOutputStream(dstFile);
+            os.write(srcBytes);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                // 反向关流
+                os.close();
+                ois.close();
+                is.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+    
+    /**
+     * 压缩文件
+     * 
+     * @param srcFile 要压缩文件的全路径
+     * @param dstFile 压缩后的文件存放路径
+     */
+    public static void zipFile(String srcFile, String dstFile) {
+        // 创建文件输出流
+        OutputStream fos = null;
+        // 创建对象输出流
+        ObjectOutputStream oos = null;
+        // 创建输入流
+        InputStream fis = null;
+        
+        try {
+            // 初始化文件输入流
+            fis = new FileInputStream(srcFile);
+            // 创建一个与文件大小一致的字节数组
+            byte[] b = new byte[fis.available()];
+            // 读取文件到字节数组 b 中
+            fis.read(b);
+            // 压缩源文件，得到通过赫夫曼编码压缩后的字节数组
+            byte[] huffmanBytes = huffmanZip(b);
+            // 初始化文件输出流
+            fos = new FileOutputStream(dstFile);
+            // 创建对象输出流与 fos 关联
+            oos = new ObjectOutputStream(fos);
+            
+            // 写对象到输出流
+            // 写入通过赫夫曼编码压缩后的字节数组
+            oos.writeObject(huffmanBytes);
+            // 写入赫夫曼编码，解压时候要用
+            oos.writeObject(huffmanCodes);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                fis.close();
+                oos.close();
+                fos.close();
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     // 解压（解码）
@@ -146,7 +250,9 @@ public class HuffmanCode {
         // 返回的是 temp 对应的二进制的补码
         String str = Integer.toBinaryString(temp);
         
-        if (flag) {
+        // 如果压缩生成的最后一个byte数为负值，会多出24位1,
+        // 解决方法：这一段判断条件加一个temp<0
+        if (flag | temp < 0) {
             // 取低位的 8 位，因为 int 是 16 位，而 int 是 16 位
             return str.substring(str.length() - 8);
         } else {
