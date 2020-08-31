@@ -20,17 +20,19 @@ public class BinarySortTreeDemo {
         binarySortTree.infixOrderList();
         System.out.println("删除节点后：");
         // 测试删除叶子节点
-        /*binarySortTree.deleteNode(2);
+        binarySortTree.deleteNode(0);
+        binarySortTree.deleteNode(2);
         binarySortTree.deleteNode(5);
         binarySortTree.deleteNode(9);
-        binarySortTree.deleteNode(12);*/
-        
+        binarySortTree.deleteNode(12);
+
         // 测试删除只有一棵子树的节点
-        // binarySortTree.deleteNode(1);
-        
+        binarySortTree.deleteNode(1);
+
         // 测试删除有两棵子树的节点
         binarySortTree.deleteNode(3);
         binarySortTree.deleteNode(10);
+        binarySortTree.deleteNode(7);
         binarySortTree.infixOrderList();
     }
 }
@@ -115,24 +117,37 @@ class BinarySortTree {
             // 如果要删除的节点只有一棵子树
             // 判断 targetNode 有左子树还是有右子树
             if (targetNode.left != null) {
-                // targetNode 有左子树
-                // 判断 targetNode 是 parentNode 的左子节点还是右子节点
-                if (parentNode.left != null && parentNode.left.value == value) {
-                    // targetNode 是 parentNode 的左子节点
-                    parentNode.left = targetNode.left;
-                } else {
-                    // targetNode 是 parentNode 的右子节点
-                    parentNode.right = targetNode.left;
+                // 删除的不是根节点
+                if (parentNode != null) {
+                    // targetNode 有左子树
+                    // 判断 targetNode 是 parentNode 的左子节点还是右子节点
+                    if (parentNode.left != null && parentNode.left.value == value) {
+                        // targetNode 是 parentNode 的左子节点
+                        parentNode.left = targetNode.left;
+                    } else {
+                        // targetNode 是 parentNode 的右子节点
+                        parentNode.right = targetNode.left;
+                    }
+                } else { 
+                    // 删除的是根节点
+                    root = root.left;
                 }
+                
             } else {
-                // targetNode 有右子树
-                // 判断 targetNode 是 parentNode 的左子节点还是右子节点
-                if (parentNode.left != null && parentNode.left.value == value) {
-                    // targetNode 是 parentNode 的左子节点
-                    parentNode.left = targetNode.right;
+                // 删除的不是根节点
+                if (parentNode != null) {
+                    // targetNode 有右子树
+                    // 判断 targetNode 是 parentNode 的左子节点还是右子节点
+                    if (parentNode.left != null && parentNode.left.value == value) {
+                        // targetNode 是 parentNode 的左子节点
+                        parentNode.left = targetNode.right;
+                    } else {
+                        // targetNode 是 parentNode 的右子节点
+                        parentNode.right = targetNode.right;
+                    }
                 } else {
-                    // targetNode 是 parentNode 的右子节点
-                    parentNode.right = targetNode.right;
+                    // 删除的是根节点
+                    root = root.right;
                 }
             }
         }
