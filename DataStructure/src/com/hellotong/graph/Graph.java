@@ -219,7 +219,6 @@ public class Graph {
     /*
     图的一些常用方法
      */
-
     /**
      * 获取图中边的个数
      * @return 边的个数
