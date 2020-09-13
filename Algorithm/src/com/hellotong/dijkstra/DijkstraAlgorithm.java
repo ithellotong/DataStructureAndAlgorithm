@@ -3,7 +3,7 @@ package com.hellotong.dijkstra;
 import java.util.Arrays;
 
 /**
- * 迪杰斯特拉算法求最短路径
+ * 迪杰斯特拉算法求出发顶点到各顶点的最短路径
  *
  * @author hellotong
  * @date 2020-09-12 18:35
