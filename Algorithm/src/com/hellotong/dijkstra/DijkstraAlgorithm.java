@@ -25,6 +25,7 @@ public class DijkstraAlgorithm {
         Graph graph = new Graph(vertexs, matrix);
         graph.showGraph();
         
+        // 假设出发顶点为 G，其他出发顶点也可
         graph.dijkstra(6);
         // 显示出发顶点到各顶点的最短距离
         graph.showDijkstra();
@@ -52,7 +53,7 @@ class Graph {
      * @param index 出发顶点的下标
      */
     public void dijkstra(int index) {
-        vv = new VisitedVertex(vertexs.length, 6);
+        vv = new VisitedVertex(vertexs.length, index);
         // 更新通过 index 顶点到周围顶点之间的距离
         update(index);
 
